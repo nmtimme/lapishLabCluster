@@ -1,0 +1,10 @@
+#!/bin/bash 
+#PBS -l nodes=1:ppn=8,walltime=6:00:00,gres=ccm
+#PBS -M username@indiana.edu 
+#PBS -m abe 
+#PBS -N spikeSortStage2
+#PBS -o spikeSortStage2Out
+#PBS -e spikeSortStage2Error
+cd lapishLabCluster/parallelJobs
+ccmrun matlab -r stage2Job
+
