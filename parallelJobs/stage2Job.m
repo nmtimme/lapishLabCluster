@@ -12,14 +12,14 @@
 
 % Set the main directory on the data capacitor to store data (something
 % like...)
-mainDC = '/N/dc2/scratch/nmtimme/ver2ParTest1';
+mainDC = '/N/dc2/scratch/nmtimme/batch1';
 
 
 %% Load the job information
 
 % Find the job number
 jobNum = str2num(getenv('PBS_ARRAYID'));
-% jobNum = 1;
+%jobNum = 16;
 
 % Load the job info
 load([mainDC,filesep,'spikeSortingStage2Info.mat'])
