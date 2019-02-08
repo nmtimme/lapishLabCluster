@@ -15,6 +15,7 @@ function [] = stage3Core(info)
 %       info.IUstring (string): IU Box Password.
 %       info.mainDC (string): Full file path for the main spike sorting
 %           directory on the Data Capacitor.
+%       info.username (string): IU Box username
 
 %% Pull variables out of the info structure
 
@@ -24,6 +25,7 @@ dcDataSetDir = info.dcDataSetDir;
 dataSetID = info.dataSetID;
 IUstring = info.IUstring;
 mainDC = info.mainDC;
+username = info.username;
 
 %% Load the results of the user review of the stage 2 results for this job
 
@@ -200,7 +202,7 @@ TxtCell{3,1} = 'set ftps:initial-prot ""';
 TxtCell{4,1} = 'set ftp:ssl-force true';
 TxtCell{5,1} = 'set ftp:ssl-protect-data true';
 TxtCell{6,1} = 'open ftps://ftp.box.com:990';
-TxtCell{7,1} = ['user nmtimme@indiana.edu ',IUstring];
+TxtCell{7,1} = ['user ',username,'@indiana.edu ',IUstring];
 TxtCell{8,1} = ['cd "',boxDataSetDir,'"'];
 temp = regexp(dcDataSetDir,filesep,'split');
 TxtCell{9,1} = ['mkdir "SpikeSorting-',temp{end},'"'];

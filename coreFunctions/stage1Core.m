@@ -16,6 +16,7 @@ function [] = stage1Core(info)
 %       info.IUstring (string): IU Box Password.
 %       info.mainDC (string): Full file path for the main spike sorting
 %           directory on the Data Capacitor.
+%       info.username (string): IU Box username
 
 
 %% Pull variables out of the info structure
@@ -26,6 +27,7 @@ dcDataSetDir = info.dcDataSetDir;
 dataSetID = info.dataSetID;
 IUstring = info.IUstring;
 mainDC = info.mainDC;
+username = info.username;
 
 %% Transfer the data from box to the data capacitor
 
@@ -45,7 +47,7 @@ TxtCell{3,1} = 'set ftps:initial-prot ""';
 TxtCell{4,1} = 'set ftp:ssl-force true';
 TxtCell{5,1} = 'set ftp:ssl-protect-data true';
 TxtCell{6,1} = 'open ftps://ftp.box.com:990';
-TxtCell{7,1} = ['user nmtimme@indiana.edu ',IUstring];
+TxtCell{7,1} = ['user ',username,'@indiana.edu ',IUstring];
 TxtCell{8,1} = ['cd "',boxDataSetDir,'"'];
 TxtCell{9,1} = 'get all_channels.events';
 TxtCell{10,1} = 'get Continuous_Data.openephys';
