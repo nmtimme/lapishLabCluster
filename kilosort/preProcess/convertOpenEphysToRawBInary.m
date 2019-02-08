@@ -53,7 +53,7 @@ for k = 1:nBlocks
             end
             samples(:,j)         = collectSamps;
         end
-                
+                                
         if nbatches<1000
             flag = 0;
         end
@@ -68,6 +68,24 @@ for k = 1:nBlocks
             samples = samples - repmat(chanRefint16(iRef:jRef),[size(samples,1),1]);
             iRef = jRef + 1;
         end
+        
+        if ~isempty(ops.quietChan) % Nick added to allow for quieting channels
+            for j = 1:ops.Nchan
+                if ops.quietChan(j) == 2
+                    samples(j,:) = int16(5*randn(size(samples(j,:))));
+                end
+            end
+        end
+        
+        if ops.dup2noise == 1 % Nick added to allow noisy channels for shanks with less than 4 good channels
+            for j = 2:ops.Nchan
+                if isequal(samples(1,:),samples(j,:))
+                    samples(j,:) = int16(5*randn(size(samples(j,:))));
+                end
+            end
+        end
+
+
         
         fwrite(fidout, samples, 'int16');
         
