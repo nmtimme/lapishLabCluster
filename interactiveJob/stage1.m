@@ -9,17 +9,17 @@
 
 % Set the main directory on the data capacitor to store data (something
 % like...)
-mainDC = '/N/dc2/scratch/nmtimme/ver2IntTest1';
+mainDC = '/N/dc2/scratch/nmtimme/ver2IntTest2';
 
 
 %% Data Set Information
 
 % List the directory of the data set on box 
-boxDataSetDir = 'NickEphysData/2018-11-12 - Session3/openEphysData';
+boxDataSetDir = 'NickEphysData/2018-11-21 - Session4/openEphysData';
 
 % List the name of the data set (note, no
 % spaces should be used)
-dataSetID = '2018-11-12-Session3';
+dataSetID = '2018-11-21-Session4';
 
 % Set parameters for the data set. This will be stored as an 1 by M cell
 % array (M = number of parameters). Note, many other parameters are hard 
@@ -55,7 +55,10 @@ dcDataSetDir = dataSetDir;
 mkdir([mainDC,'/Stage1ResultsPreReview'])
 mkdir([mainDC,'/Stage1ResultsPostReview'])
 
-%% Get IU Box Password
+%% Get IU Box Password and Username
+
+% Request that the user enter their username
+username = input('Enter IU Username: ','s');
 
 % Request that the user enter the password for IU Box
 IUstring = input('Enter IU Box Password: ','s');
@@ -65,7 +68,7 @@ IUstring = input('Enter IU Box Password: ','s');
 
 % Save the file in the main Data Capacitory directory for this data set so
 % it is easy to find
-save([mainDC,filesep,'spikeSortingStage1Info.mat'],'boxDataSetDir','dataSetParams','dcDataSetDir','dataSetID','IUstring')
+save([mainDC,filesep,'spikeSortingStage1Info.mat'],'boxDataSetDir','dataSetParams','dcDataSetDir','dataSetID','IUstring','username')
 
 %% Run the core function
 
@@ -81,6 +84,7 @@ info.dcDataSetDir = dcDataSetDir;
 info.dataSetID = dataSetID;
 info.IUstring = IUstring;
 info.mainDC = mainDC;
+info.username = username;
 
 % Run the core function
 stage1Core(info)
