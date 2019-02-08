@@ -9,7 +9,7 @@
 
 % Set the main directory on the data capacitor to store data (something
 % like...)
-mainDC = '/N/dc2/scratch/nmtimme/ver2IntTest1';
+mainDC = '/N/dc2/scratch/nmtimme/ver2IntTest2';
 
 %% Perform Necessary Tasks
 
@@ -24,7 +24,7 @@ mkdir([mainDC,'/Stage2ResultsPostReview'])
 %% Make a file with information 
 
 % Save the file in your main Karst directory so it is easy to find
-save([mainDC,filesep,'spikeSortingStage2Info.mat'],'boxDataSetDir','dataSetParams','dcDataSetDir','dataSetID','IUstring')
+save([mainDC,filesep,'spikeSortingStage2Info.mat'],'boxDataSetDir','dataSetParams','dcDataSetDir','dataSetID','IUstring','username')
 
 %% Run the core function
 

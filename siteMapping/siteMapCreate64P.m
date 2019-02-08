@@ -8,10 +8,10 @@
 %% Set where to record the data and what name to use
 
 % Set directory to store the site mapping information
-siteMapDir = 'C:\Users\Nicholas Timme\Box Sync\NickExperimental\Experiment1\SpikeSorting\Version1\SiteMappings';
+siteMapDir = 'C:\Users\Nicholas Timme\Box Sync\NickExperimental\Experiment1\SpikeSorting\batch1\SiteMappings';
 
 % Set the name of the site mapping
-siteMapName = 'siteMapAnim15Sept2018';
+siteMapName = 'siteMap64P';
 
 %% Record a notes variable
 
@@ -19,7 +19,7 @@ siteMapName = 'siteMapAnim15Sept2018';
 % See example.
 
 % Example: siteMapNotes = 'This is the mapping for Nicks animal 15, surgery Sept 2018, 64 channel probe (ASSY-158-P-1, PN 3379), EIB fold on animals left, headstage chip pointed towards animal back.';
-siteMapNotes = 'This is the mapping for Nicks animal 15, surgery Sept 2018, 64 channel probe (ASSY-158-P-1, PN 3379), EIB fold on animals left, headstage chip pointed towards animal back.';
+siteMapNotes = 'This is a site mapping for an animal with one 64 channel ASSY-158-P-1 probe. The fold in the probe is on the animals left and the headstage chip is pointed towards the animals back. Each shank is sorted separately.';
 
 
 %% Record the probe geometry
@@ -31,7 +31,7 @@ siteMapNotes = 'This is the mapping for Nicks animal 15, surgery Sept 2018, 64 c
 % probeGeo(i,:) = [j,k] means that probe channel i has an x coordinate of j
 % and a y coordinate of k (usually in um).
 
-% ASSY-158 (64 channels) (each probe shank sorted separately)
+% ASSY-158-P-1 (64 channels) (each probe shank sorted separately)
 probeGeo = NaN([64,2]);
 probeGeo(1,:) = [0,75];
 probeGeo(2,:) = [22.5,87.5];

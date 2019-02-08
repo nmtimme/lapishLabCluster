@@ -12,7 +12,7 @@
 
 % Set the main directory on the data capacitor to store data (something
 % like...)
-mainDC = '/N/dc2/scratch/nmtimme/ver2ParTest1';
+mainDC = '/N/dc2/scratch/nmtimme/batch1';
 
 
 %% Load the job information
@@ -45,6 +45,7 @@ info.dcDataSetDir = dcDataSetDir;
 info.dataSetID = dataSetID;
 info.IUstring = IUstring;
 info.mainDC = mainDC;
+info.username = username;
 
 % Run the core function
 stage1Core(info)

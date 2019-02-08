@@ -1,6 +1,6 @@
-% siteMapCreate
+% msClusterMapCreateVer1
 %
-%   siteMapCreate creates site mapping variables necessary for the
+%   msClusterMapCreate creates site mapping variables necessary for the
 %   spike sorting pipeline. This script is mostly just a helpful template
 %   that will require extensive editing with data specific to your
 %   experiment.
@@ -8,10 +8,10 @@
 %% Set where to record the data and what name to use
 
 % Set directory to store the site mapping information
-siteMapDir = 'C:\Users\Nicholas Timme\Box Sync\NickExperimental\Experiment1\SpikeSorting\Version1\SiteMappings';
+siteMapDir = 'C:\Users\Nicholas Timme\Box Sync\NickExperimental\Experiment1\SpikeSorting\batch1\SiteMappings';
 
 % Set the name of the site mapping
-siteMapName = 'siteMapAnim15Sept2018';
+siteMapName = 'siteMap64F';
 
 %% Record a notes variable
 
@@ -19,7 +19,7 @@ siteMapName = 'siteMapAnim15Sept2018';
 % See example.
 
 % Example: siteMapNotes = 'This is the mapping for Nicks animal 15, surgery Sept 2018, 64 channel probe (ASSY-158-P-1, PN 3379), EIB fold on animals left, headstage chip pointed towards animal back.';
-siteMapNotes = 'This is the mapping for Nicks animal 15, surgery Sept 2018, 64 channel probe (ASSY-158-P-1, PN 3379), EIB fold on animals left, headstage chip pointed towards animal back.';
+siteMapNotes = 'This is a site mapping for an animal with one 64 channel ASSY-158-F probe. The fold in the probe is on the animals left and the headstage chip is pointed towards the animals back. Each shank is sorted separately.';
 
 
 %% Record the probe geometry
@@ -31,72 +31,72 @@ siteMapNotes = 'This is the mapping for Nicks animal 15, surgery Sept 2018, 64 c
 % probeGeo(i,:) = [j,k] means that probe channel i has an x coordinate of j
 % and a y coordinate of k (usually in um).
 
-% ASSY-158 (64 channels) (each probe shank sorted separately)
+% ASSY-158-F (64 channels) (each probe shank sorted separately)
 probeGeo = NaN([64,2]);
-probeGeo(1,:) = [0,75];
-probeGeo(2,:) = [22.5,87.5];
-probeGeo(3,:) = [0,175];
-probeGeo(4,:) = [0,125];
-probeGeo(5,:) = [0,150];
-probeGeo(6,:) = [0,0];
-probeGeo(7,:) = [0,25];
-probeGeo(8,:) = [22.5,12.5];
-probeGeo(9,:) = [22.5,37.5];
-probeGeo(10,:) = [0,100];
-probeGeo(11,:) = [22.5,187.5];
-probeGeo(12,:) = [0,50];
-probeGeo(13,:) = [22.5,137.5];
-probeGeo(14,:) = [22.5,62.5];
-probeGeo(15,:) = [22.5,162.5];
-probeGeo(16,:) = [22.5,112.5];
-probeGeo(17,:) = [22.5,12.5];
-probeGeo(18,:) = [0,175];
-probeGeo(19,:) = [0,0];
-probeGeo(20,:) = [0,125];
-probeGeo(21,:) = [0,25];
-probeGeo(22,:) = [0,100];
-probeGeo(23,:) = [0,75];
-probeGeo(24,:) = [0,50];
-probeGeo(25,:) = [22.5,187.5];
-probeGeo(26,:) = [22.5,162.5];
-probeGeo(27,:) = [22.5,87.5];
-probeGeo(28,:) = [22.5,137.5];
-probeGeo(29,:) = [22.5,112.5];
-probeGeo(30,:) = [22.5,62.5];
-probeGeo(31,:) = [22.5,37.5];
-probeGeo(32,:) = [0,150];
-probeGeo(33,:) = [22.5,37.5];
-probeGeo(34,:) = [0,150];
-probeGeo(35,:) = [22.5,112.5];
-probeGeo(36,:) = [22.5,62.5];
-probeGeo(37,:) = [22.5,87.5];
-probeGeo(38,:) = [22.5,137.5];
-probeGeo(39,:) = [22.5,187.5];
-probeGeo(40,:) = [22.5,162.5];
-probeGeo(41,:) = [0,75];
-probeGeo(42,:) = [0,50];
-probeGeo(43,:) = [0,25];
-probeGeo(44,:) = [0,100];
-probeGeo(45,:) = [0,0];
-probeGeo(46,:) = [0,125];
-probeGeo(47,:) = [22.5,12.5];
-probeGeo(48,:) = [0,175];
-probeGeo(49,:) = [22.5,162.5];
-probeGeo(50,:) = [22.5,112.5];
-probeGeo(51,:) = [22.5,137.5];
-probeGeo(52,:) = [22.5,62.5];
-probeGeo(53,:) = [22.5,187.5];
-probeGeo(54,:) = [0,50];
-probeGeo(55,:) = [22.5,37.5];
-probeGeo(56,:) = [0,100];
-probeGeo(57,:) = [0,25];
-probeGeo(58,:) = [22.5,12.5];
-probeGeo(59,:) = [0,150];
+probeGeo(1,:) = [16.5,75];
+probeGeo(2,:) = [0,120];
+probeGeo(3,:) = [0,0];
+probeGeo(4,:) = [16.5,135];
+probeGeo(5,:) = [16.5,15];
+probeGeo(6,:) = [16.5,45];
+probeGeo(7,:) = [16.5,105];
+probeGeo(8,:) = [16.5,75];
+probeGeo(9,:) = [16.5,135];
+probeGeo(10,:) = [16.5,105];
+probeGeo(11,:) = [16.5,45];
+probeGeo(12,:) = [16.5,15];
+probeGeo(13,:) = [0,60];
+probeGeo(14,:) = [0,0];
+probeGeo(15,:) = [0,30];
+probeGeo(16,:) = [0,90];
+probeGeo(17,:) = [0,150];
+probeGeo(18,:) = [0,60];
+probeGeo(19,:) = [0,30];
+probeGeo(20,:) = [0,120];
+probeGeo(21,:) = [0,120];
+probeGeo(22,:) = [0,150];
+probeGeo(23,:) = [0,30];
+probeGeo(24,:) = [0,60];
+probeGeo(25,:) = [0,0];
+probeGeo(26,:) = [16.5,15];
+probeGeo(27,:) = [16.5,75];
+probeGeo(28,:) = [16.5,135];
+probeGeo(29,:) = [16.5,105];
+probeGeo(30,:) = [16.5,45];
+probeGeo(31,:) = [0,90];
+probeGeo(32,:) = [0,90];
+probeGeo(33,:) = [16.5,135];
+probeGeo(34,:) = [16.5,135];
+probeGeo(35,:) = [0,150];
+probeGeo(36,:) = [0,0];
+probeGeo(37,:) = [0,30];
+probeGeo(38,:) = [0,120];
+probeGeo(39,:) = [0,60];
+probeGeo(40,:) = [0,90];
+probeGeo(41,:) = [16.5,45];
+probeGeo(42,:) = [16.5,15];
+probeGeo(43,:) = [16.5,105];
+probeGeo(44,:) = [16.5,75];
+probeGeo(45,:) = [16.5,45];
+probeGeo(46,:) = [16.5,105];
+probeGeo(47,:) = [16.5,75];
+probeGeo(48,:) = [16.5,15];
+probeGeo(49,:) = [16.5,135];
+probeGeo(50,:) = [16.5,75];
+probeGeo(51,:) = [16.5,105];
+probeGeo(52,:) = [0,60];
+probeGeo(53,:) = [16.5,15];
+probeGeo(54,:) = [0,90];
+probeGeo(55,:) = [0,120];
+probeGeo(56,:) = [0,120];
+probeGeo(57,:) = [0,150];
+probeGeo(58,:) = [0,30];
+probeGeo(59,:) = [0,60];
 probeGeo(60,:) = [0,0];
-probeGeo(61,:) = [0,175];
-probeGeo(62,:) = [0,125];
-probeGeo(63,:) = [0,75];
-probeGeo(64,:) = [22.5,87.5];
+probeGeo(61,:) = [0,30];
+probeGeo(62,:) = [0,90];
+probeGeo(63,:) = [0,0];
+probeGeo(64,:) = [16.5,45];
 
 
 %% Record the site mappping
@@ -115,7 +115,7 @@ probeGeo(64,:) = [22.5,87.5];
 % openE2probe(i) = j means that open ephys channel i corresponds to probe
 % channel j.
 
-% ASSY-158 (64 channels) - fold between EIBs on animal's left, headstage 
+% ASSY-158-F (64 channels) - fold between EIBs on animal's left, headstage 
 % chip toward animal's back
 openE2probe = NaN([64,1]);
 openE2probe(1) = 16;
@@ -190,72 +190,72 @@ openE2probe(64) = 17;
 
 % probeChanShankID(i) = j means that probe channel i is on shank j
 
-% ASSY-158 (64 channels) (each probe shank sorted separately)
+% ASSY-158-F (64 channels) (each probe shank sorted separately)
 probeChanShankID = NaN([64,1]);
-probeChanShankID(1) = 1;
+probeChanShankID(1) = 2;
 probeChanShankID(2) = 1;
-probeChanShankID(3) = 1;
-probeChanShankID(4) = 1;
-probeChanShankID(5) = 1;
+probeChanShankID(3) = 2;
+probeChanShankID(4) = 2;
+probeChanShankID(5) = 2;
 probeChanShankID(6) = 1;
 probeChanShankID(7) = 1;
 probeChanShankID(8) = 1;
 probeChanShankID(9) = 1;
-probeChanShankID(10) = 1;
-probeChanShankID(11) = 1;
+probeChanShankID(10) = 2;
+probeChanShankID(11) = 2;
 probeChanShankID(12) = 1;
 probeChanShankID(13) = 1;
 probeChanShankID(14) = 1;
 probeChanShankID(15) = 1;
 probeChanShankID(16) = 1;
 probeChanShankID(17) = 2;
-probeChanShankID(18) = 2;
+probeChanShankID(18) = 3;
 probeChanShankID(19) = 2;
-probeChanShankID(20) = 2;
+probeChanShankID(20) = 3;
 probeChanShankID(21) = 2;
-probeChanShankID(22) = 2;
-probeChanShankID(23) = 2;
+probeChanShankID(22) = 3;
+probeChanShankID(23) = 3;
 probeChanShankID(24) = 2;
-probeChanShankID(25) = 2;
-probeChanShankID(26) = 2;
-probeChanShankID(27) = 2;
-probeChanShankID(28) = 2;
-probeChanShankID(29) = 2;
-probeChanShankID(30) = 2;
+probeChanShankID(25) = 3;
+probeChanShankID(26) = 3;
+probeChanShankID(27) = 3;
+probeChanShankID(28) = 3;
+probeChanShankID(29) = 3;
+probeChanShankID(30) = 3;
 probeChanShankID(31) = 2;
-probeChanShankID(32) = 2;
-probeChanShankID(33) = 3;
-probeChanShankID(34) = 3;
-probeChanShankID(35) = 3;
-probeChanShankID(36) = 3;
-probeChanShankID(37) = 3;
-probeChanShankID(38) = 3;
-probeChanShankID(39) = 3;
-probeChanShankID(40) = 3;
-probeChanShankID(41) = 3;
-probeChanShankID(42) = 3;
-probeChanShankID(43) = 3;
-probeChanShankID(44) = 3;
-probeChanShankID(45) = 3;
-probeChanShankID(46) = 3;
-probeChanShankID(47) = 3;
-probeChanShankID(48) = 3;
-probeChanShankID(49) = 4;
-probeChanShankID(50) = 4;
-probeChanShankID(51) = 4;
-probeChanShankID(52) = 4;
-probeChanShankID(53) = 4;
-probeChanShankID(54) = 4;
-probeChanShankID(55) = 4;
-probeChanShankID(56) = 4;
-probeChanShankID(57) = 4;
-probeChanShankID(58) = 4;
-probeChanShankID(59) = 4;
-probeChanShankID(60) = 4;
-probeChanShankID(61) = 4;
-probeChanShankID(62) = 4;
-probeChanShankID(63) = 4;
-probeChanShankID(64) = 4;
+probeChanShankID(32) = 3;
+probeChanShankID(33) = 4;
+probeChanShankID(34) = 5;
+probeChanShankID(35) = 4;
+probeChanShankID(36) = 4;
+probeChanShankID(37) = 4;
+probeChanShankID(38) = 4;
+probeChanShankID(39) = 4;
+probeChanShankID(40) = 4;
+probeChanShankID(41) = 5;
+probeChanShankID(42) = 4;
+probeChanShankID(43) = 4;
+probeChanShankID(44) = 5;
+probeChanShankID(45) = 4;
+probeChanShankID(46) = 5;
+probeChanShankID(47) = 4;
+probeChanShankID(48) = 5;
+probeChanShankID(49) = 6;
+probeChanShankID(50) = 6;
+probeChanShankID(51) = 6;
+probeChanShankID(52) = 5;
+probeChanShankID(53) = 6;
+probeChanShankID(54) = 5;
+probeChanShankID(55) = 5;
+probeChanShankID(56) = 6;
+probeChanShankID(57) = 5;
+probeChanShankID(58) = 5;
+probeChanShankID(59) = 6;
+probeChanShankID(60) = 5;
+probeChanShankID(61) = 6;
+probeChanShankID(62) = 6;
+probeChanShankID(63) = 6;
+probeChanShankID(64) = 6;
 
 
 %% Plot the shank geometry for user verification
