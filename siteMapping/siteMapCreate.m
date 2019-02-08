@@ -277,7 +277,13 @@ for iShank = 1:nShanks
         yMax = max([yMax,probeGeo(chans(iChan),2)]);
     end
     dx = xMax - xMin;
+    if dx == 0
+        dx = 1;
+    end
     dy = yMax - yMin;
+    if dy == 0
+        dy = 1;
+    end
     xlim([xMin - 0.1*dx,xMax + 0.1*dx])
     ylim([yMin - 0.1*dy,yMax + 0.1*dy])
     title(['Shank ',num2str(iShank)])
