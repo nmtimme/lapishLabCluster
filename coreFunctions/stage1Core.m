@@ -47,7 +47,7 @@ TxtCell{3,1} = 'set ftps:initial-prot ""';
 TxtCell{4,1} = 'set ftp:ssl-force true';
 TxtCell{5,1} = 'set ftp:ssl-protect-data true';
 TxtCell{6,1} = 'open ftps://ftp.box.com:990';
-TxtCell{7,1} = ['user ',username,'@indiana.edu ',IUstring];
+TxtCell{7,1} = ['user ',username,'@iu.edu ',IUstring];
 TxtCell{8,1} = ['cd "',boxDataSetDir,'"'];
 TxtCell{9,1} = 'get all_channels.events';
 TxtCell{10,1} = 'get Continuous_Data.openephys';
@@ -105,7 +105,7 @@ disp('Starting basic data report generation.')
 tic
 
 % Set the down sampling factor
-nDSFact = 50;
+nDSFact = 10;
 
 % Set the number of seconds in each data chunk to be recorded
 nTChunk = 4;
@@ -118,8 +118,12 @@ chanInfo = cell([dataSetParams{1},1]);
 dataChunk = cell([dataSetParams{1},3]);
 power = cell([dataSetParams{1},3]);
 dataSD = NaN([dataSetParams{1},1]);
+TempMedianRef=cell([1,3]);
+FiltdataThr= NaN(dataSetParams{1},3);
+
 for iChan = 1:dataSetParams{1}
     [data,timestamps,chanInfo{iChan}] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH',num2str(iChan),'.continuous']);
+        
     if size(data,2) == 1
         data = data';
     end
@@ -141,6 +145,7 @@ for iChan = 1:dataSetParams{1}
     for i = 1:3
         tempData = data((timestamps >= tStart(i)) & (timestamps <= (tStart(i) + nTChunk)));
         tempTimestamps = timestamps((timestamps >= tStart(i)) & (timestamps <= (tStart(i) + nTChunk)));
+        TempMedianRef{i}(iChan,:)= tempData;
         
         % Down sample the data
         n = length(tempData);
@@ -151,7 +156,7 @@ for iChan = 1:dataSetParams{1}
         end
         tempData = mean(reshape(tempData,[nDSFact,nSm]));
         tempTimestamps = mean(reshape(tempTimestamps,[nDSFact,nSm]));
-        
+
         dataChunk{iChan,i} = [tempData;tempTimestamps];
         
         % Calculate the power spectrum
@@ -167,7 +172,7 @@ for iChan = 1:dataSetParams{1}
         
         
     end
-    
+
 %     % Down sample the data
 %     n = length(data);
 %     nSm = floor(n/nDSFact);
@@ -185,16 +190,37 @@ for iChan = 1:dataSetParams{1}
 %     f = (0:n-1)*(fs/n);
 %     power{iChan} = [abs(y).^2/n;f];
     
-    
-    
+       
 end
 
+% add a filtered row for each data chunk
 
+% design filter between 300 and 3000Hz
+sampleRate = chanInfo{1}.header.sampleRate;
+[b,a]=ellip(4,0.1,40,[300 3000]*2/(sampleRate));
+for i=1:3
+    % get median of channels for referencing the chunks
+    MedianRef{i}=median(TempMedianRef{i});
+    for iChan=1:dataSetParams{1}
+        tempFiltered= filtfilt(b,a,TempMedianRef{i}(iChan,:)-MedianRef{i});
+        %downsample
+        n = length(tempFiltered);
+        nSm = floor(n/nDSFact);
+        if rem(n,nDSFact) ~= 0
+            tempFiltered(((nSm*nDSFact) + 1):end) = [];
+        end
+        tempFiltered = mean(reshape(tempFiltered,[nDSFact,nSm]));
+        dataChunk{iChan,i}=[dataChunk{iChan,i}; tempFiltered];
+        FiltdataThr(iChan,i) = 5 * median(abs(tempFiltered))/0.6745;
+
+    end
+end
+        
 % Save a copy of the stage 1 jobs results in the directory for the data set
 % and in the directory with all the results for easy shipment back to local
 % machines.
 save([dcDataSetDir,filesep,'Stage1PreReview',dataSetID],'chanInfo','dataChunk','power','dataSD')
-save([mainDC,filesep,'Stage1ResultsPreReview',filesep,'Stage1PreReview',dataSetID],'chanInfo','dataChunk','power','dataSD')
+save([mainDC,filesep,'Stage1ResultsPreReview',filesep,'Stage1PreReview',dataSetID],'chanInfo','dataChunk','power','dataSD','FiltdataThr')
 
 disp(['Finished basic data report generation. It took ',num2str(toc,3),' seconds.'])
 
