@@ -854,8 +854,8 @@ for iShank = 1:(max(probeChanShankID))
         
         
         % Get information for plotting raster
-        tStart = 100; % Start time of raster graph in seconds
-        tEnd = 200; % End time of raster graph in seconds
+        tStart = 10; % Start time of raster graph in seconds
+        tEnd = 2500; % End time of raster graph in seconds
         tempRaster = spkInds;
         for iNeuron = 1:nNeurons
             tempRaster{iNeuron} = tempRaster{iNeuron}/sampleRate; % Convert to seconds
