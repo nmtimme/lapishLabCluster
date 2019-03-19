@@ -10,7 +10,7 @@
 
 % Set the main directory on the data capacitor to store data (something
 % like...)
-mainDC = '/N/dc2/scratch/nmtimme/batch1';
+mainDC = '/N/dc2/scratch/edefalco/batch6';
 
 % Set the queue that should receive the jobs (leave empty if not requesting
 % a certain queue)
@@ -36,7 +36,7 @@ mkdir([mainDC,'/Stage2ResultsPostReview'])
 %% Make a file with information for the jobs
 
 % Save the file in your main Karst directory so it is easy to find
-save([mainDC,filesep,'spikeSortingStage2Info.mat'],'boxDataSetDirs','dataSetParams','dcDataSetDirs','dataSetIDs','IUstring','username')
+save([mainDC,filesep,'spikeSortingStage2Info.mat'],'boxDataSetDirs','dataSetParams','dcDataSetDirs','dataSetIDs','IUstring','username','suffixs')
 
 %% Make a text file to start all the jobs on Karst
 

@@ -1,6 +1,6 @@
 #!/bin/bash 
 #PBS -l nodes=1:ppn=1,walltime=2:00:00 
-#PBS -M username@indiana.edu 
+#PBS -M edefalco@iu.edu 
 #PBS -m abe 
 #PBS -N spikeSortStage3
 #PBS -o spikeSortStage3Out

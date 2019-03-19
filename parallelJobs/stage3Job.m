@@ -12,7 +12,7 @@
 
 % Set the main directory on the data capacitor to store data (something
 % like...)
-mainDC = '/N/dc2/scratch/nmtimme/batch1';
+mainDC = '/N/dc2/scratch/edefalco/batch6';
 
 
 %% Load the job information
@@ -29,6 +29,7 @@ boxDataSetDir = boxDataSetDirs{jobNum};
 params = dataSetParams(jobNum,:);
 dcDataSetDir = dcDataSetDirs{jobNum};
 dataSetID = dataSetIDs{jobNum};
+suffix =suffixs{jobNum};
 
 %% Run the core function
 
@@ -45,6 +46,7 @@ info.dataSetID = dataSetID;
 info.IUstring = IUstring;
 info.mainDC = mainDC;
 info.username = username;
+info.suffix=suffix;
 
 % Run the core function
 stage3Core(info)
