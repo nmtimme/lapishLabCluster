@@ -28,7 +28,7 @@ dataSetID = info.dataSetID;
 IUstring = info.IUstring;
 mainDC = info.mainDC;
 username = info.username;
-
+suffix = info.suffix;
 %% Transfer the data from box to the data capacitor
 
 disp('Starting data transfer from IU Box to the Data Capacitor.')
@@ -49,21 +49,21 @@ TxtCell{5,1} = 'set ftp:ssl-protect-data true';
 TxtCell{6,1} = 'open ftps://ftp.box.com:990';
 TxtCell{7,1} = ['user ',username,'@iu.edu ',IUstring];
 TxtCell{8,1} = ['cd "',boxDataSetDir,'"'];
-TxtCell{9,1} = 'get all_channels.events';
-TxtCell{10,1} = 'get Continuous_Data.openephys';
-TxtCell{11,1} = 'get messages.events';
-TxtCell{12,1} = 'get settings.xml';
+TxtCell{9,1} = ['get all_channels' suffix '.events'];
+TxtCell{10,1} = ['get Continuous_Data' suffix '.openephys'];
+TxtCell{11,1} = ['get messages' suffix '.events'];
+TxtCell{12,1} = ['get settings' suffix '.xml'];
 iRow = 13;
 for i = 1:8
-    TxtCell{iRow,1} = ['get 100_ADC',num2str(i),'.continuous'];
+    TxtCell{iRow,1} = ['get 100_ADC',num2str(i),suffix,'.continuous'];
     iRow = iRow + 1;
 end
 for i = 1:3
-    TxtCell{iRow,1} = ['get 100_AUX',num2str(i),'.continuous'];
+    TxtCell{iRow,1} = ['get 100_AUX',num2str(i),suffix,'.continuous'];
     iRow = iRow + 1;
 end
 for i = 1:dataSetParams{1}
-    TxtCell{iRow,1} = ['get 100_CH',num2str(i),'.continuous'];
+    TxtCell{iRow,1} = ['get 100_CH',num2str(i),suffix,'.continuous'];
     iRow = iRow + 1;
 end
 TxtCell{iRow,1} = 'exit';
@@ -122,7 +122,7 @@ TempMedianRef=cell([1,3]);
 FiltdataThr= NaN(dataSetParams{1},3);
 
 for iChan = 1:dataSetParams{1}
-    [data,timestamps,chanInfo{iChan}] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH',num2str(iChan),'.continuous']);
+    [data,timestamps,chanInfo{iChan}] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH',num2str(iChan),suffix,'.continuous']);
         
     if size(data,2) == 1
         data = data';

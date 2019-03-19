@@ -26,6 +26,7 @@ dataSetID = info.dataSetID;
 IUstring = info.IUstring;
 mainDC = info.mainDC;
 username = info.username;
+suffix = info.suffix;
 
 %% Load the results of the user review of the stage 2 results for this job
 
@@ -43,7 +44,7 @@ tic
 disp('Organizing the data.')
 
 % Load the first channel to get parameters
-[data,~,chanInfo] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH1.continuous']);
+[data,~,chanInfo] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH1',suffix,'.continuous']);
 sampleRate = chanInfo.header.sampleRate;
 nT = length(data);
 
@@ -115,13 +116,13 @@ xChan = 3; % x-dimension ADC channel: positive values are toward right sipper (N
 yChan = 1; % y-dimension ADC channel: positive values are up on IR camera (Nick's rig)
 lChan = 5; % left auditory lick recording (Nick's rig)
 rChan = 7; % right auditory lick recording (Nick's rig)
-[xdata,timestamps,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_ADC',num2str(xChan),'.continuous']);
+[xdata,timestamps,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_ADC',num2str(xChan),suffix,'.continuous']);
 nBins = floor(length(xdata)/dsFactor);
 timestamps(((nBins*dsFactor) + 1):end) = [];
 timestamps = mean(reshape(timestamps,[dsFactor,nBins]));
-[ydata,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_ADC',num2str(yChan),'.continuous']);
-[ldata,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_ADC',num2str(lChan),'.continuous']);
-[rdata,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_ADC',num2str(rChan),'.continuous']);
+[ydata,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_ADC',num2str(yChan),suffix,'.continuous']);
+[ldata,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_ADC',num2str(lChan),suffix,'.continuous']);
+[rdata,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_ADC',num2str(rChan),suffix,'.continuous']);
 
 xdata(((nBins*dsFactor) + 1):end) = [];
 xdata = mean(reshape(xdata,[dsFactor,nBins]));
@@ -137,7 +138,7 @@ save([dcDataSetDir,filesep,'licks.mat'],'ldata','rdata','timestamps')
 
 
 % Get the med associates events
-[maEvents,maTimestamps,~] = load_open_ephys_data_faster([dcDataSetDir,'/all_channels.events']);
+[maEvents,maTimestamps,~] = load_open_ephys_data_faster([dcDataSetDir,'/all_channels', suffix, '.events']);
 save([dcDataSetDir,filesep,'maEvents.mat'],'maEvents','maTimestamps')
 
 
@@ -173,16 +174,16 @@ for iFile = 1:length(fileNames)
     if strcmp(fileNames(iFile).name,'..')
         toSend(iFile) = 0;
     end
-    if strcmp(fileNames(iFile).name,'all_channels.events')
+    if strcmp(fileNames(iFile).name,['all_channels' suffix '.events'])
         toSend(iFile) = 0;
     end
-    if strcmp(fileNames(iFile).name,'Continuous_Data.openephys')
+    if strcmp(fileNames(iFile).name,['Continuous_Data' suffix '.openephys'])
         toSend(iFile) = 0;
     end
-    if strcmp(fileNames(iFile).name,'messages.events')
+    if strcmp(fileNames(iFile).name,['messages' suffix '.events'])
         toSend(iFile) = 0;
     end
-    if strcmp(fileNames(iFile).name,'settings.xml')
+    if strcmp(fileNames(iFile).name,['settings' suffix '.xml'])
         toSend(iFile) = 0;
     end
     if length(fileNames(iFile).name) >= 3

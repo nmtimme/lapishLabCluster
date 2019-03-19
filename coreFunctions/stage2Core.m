@@ -22,7 +22,7 @@ dataSetParams = info.dataSetParams;
 dcDataSetDir = info.dcDataSetDir;
 dataSetID = info.dataSetID;
 mainDC = info.mainDC;
-
+suffix = info.suffix;
 
 %% Load the results of the user review of the stage 1 results
 
@@ -37,7 +37,7 @@ load([mainDC,filesep,'Stage1ResultsPostReview',filesep,'Stage1PostReview',dataSe
 %% Create the mda file
 
 % Load the first channel to get parameters
-[data,~,chanInfo] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH1.continuous']);
+[data,~,chanInfo] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH1',suffix,'.continuous']);
 sampleRate = chanInfo.header.sampleRate;
 nT = length(data);
 clear data
@@ -65,7 +65,7 @@ if dataSetParams{4} == 1
             % Accept the channel
             
             % Load the channel data
-            [tempChan,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH',num2str(oeChan),'.continuous']);
+            [tempChan,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH',num2str(oeChan),suffix,'.continuous']);
             chanRef = chanRef + tempChan';
             nGoodChannels = nGoodChannels + 1;
         end
@@ -114,7 +114,7 @@ elseif dataSetParams{4} == 2
                 % Accept the channel
                 
                 % Load the channel data
-                [tempData,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH',num2str(oeChan),'.continuous']);
+                [tempData,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH',num2str(oeChan),suffix,'.continuous']);
                 allData(iProbeChan,:) = tempData(iT:jT);
             end
         end
@@ -274,6 +274,7 @@ for iShank = 1:(max(probeChanShankID))
         ops.fbinary             = [dcDataSetDir,filesep,'raw_shank',num2str(iShank),'.dat']; % will be created for 'openEphys'
         ops.fproc               = [dcDataSetDir,filesep,'temp_wh_shank',num2str(iShank),'.dat']; % residual from RAM of preprocessed data
         ops.root                = dcDataSetDir; % 'openEphys' only: where raw files are
+        ops.suffix              = suffix;
         
         if ismember(dataSetParams{4},[1,2]) % Nick added for referencing (see convertOpenEphysToRawBInary.m)
             ops.refData         = [dcDataSetDir,filesep,'ref_allshanks.mat']; % The bits reference time series
@@ -521,7 +522,7 @@ for iShank = 1:(max(probeChanShankID))
 %                 % Accept the channel
 %                 
 %                 % Load the channel data into the shank data matrix
-%                 [shankData,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH',num2str(oeChan),'.continuous']);
+%                 [shankData,~,~] = load_open_ephys_data_faster([dcDataSetDir,'/100_CH',num2str(oeChan),suffix,'.continuous']);
 %                 
 %                 % Reorient shankData
 %                 shankData = shankData';
@@ -854,8 +855,8 @@ for iShank = 1:(max(probeChanShankID))
         
         
         % Get information for plotting raster
-        tStart = 100; % Start time of raster graph in seconds
-        tEnd = 200; % End time of raster graph in seconds
+        tStart = 10; % Start time of raster graph in seconds
+        tEnd = 2500; % End time of raster graph in seconds
         tempRaster = spkInds;
         for iNeuron = 1:nNeurons
             tempRaster{iNeuron} = tempRaster{iNeuron}/sampleRate; % Convert to seconds
